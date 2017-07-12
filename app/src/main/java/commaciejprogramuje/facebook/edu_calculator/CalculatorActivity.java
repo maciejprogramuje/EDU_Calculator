@@ -13,6 +13,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private Operation currentOperation = Operation.NONE;
     boolean isOperation;
     TextView upperTextView;
+    double displayValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,6 @@ public class CalculatorActivity extends AppCompatActivity {
                 calculateOperation(key);
                 break;
             case "=":
-            case "%":
                 calculateResult();
                 break;
             case "CE":
@@ -66,6 +66,9 @@ public class CalculatorActivity extends AppCompatActivity {
                 break;
             case "C":
                 clearAll();
+                break;
+            case "%":
+                calculatePercentageResult();
                 break;
         }
         displayTextView.setText(display);
@@ -88,13 +91,7 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void calculateResult() {
-        double displayValue;
-
-        if(display.equals("")) {
-            displayValue = 0.0;
-        } else {
-            displayValue = Double.valueOf(display);
-        }
+        setDisplayValueIfNull();
 
         switch (currentOperation) {
             case ADD:
@@ -113,11 +110,23 @@ public class CalculatorActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.alert0, Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case PERCENT:
-                displayResult(accumulator * displayValue / 100);
-                break;
         }
         upperTextView.setText("");
+        isOperation = false;
+    }
+
+    private void setDisplayValueIfNull() {
+        if(display.equals("")) {
+            displayValue = 0.0;
+        } else {
+            displayValue = Double.valueOf(display);
+        }
+    }
+
+    private void calculatePercentageResult() {
+        setDisplayValueIfNull();
+        displayResult(accumulator * displayValue / 100);
+        upperTextView.setText("%");
         isOperation = false;
     }
 
