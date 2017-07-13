@@ -1,15 +1,14 @@
 package commaciejprogramuje.facebook.edu_calculator;
 
-/**
- * Created by m.szymczyk on 2017-07-12.
- */
+import java.io.Serializable;
 
-enum Operation {
+
+enum Operation implements Serializable {
     NONE(""), ADD("+"), SUBSTRACT("-"), DIVIDE("/"), MULTIPLY("*"), SQRT("SQRT"), PERCENT("%");
 
     private final String key;
 
-    private Operation(String key) {
+    Operation(String key) {
         this.key = key;
     }
 
