@@ -71,6 +71,11 @@
                 android:id="@+id/button"
                 style="@style/KeyStyle"
                 android:text="@string/btnC" />
+
+            <Button
+                android:id="@+id/button20"
+                style="@style/KeyStyle"
+                android:text="@string/btnSin" />
         </TableRow>
 
         <TableRow
@@ -101,6 +106,11 @@
                 android:id="@+id/button8"
                 style="@style/KeyStyle"
                 android:text="@string/btnMultiply" />
+
+            <Button
+                android:id="@+id/button21"
+                style="@style/KeyStyle"
+                android:text="@string/btnCos" />
         </TableRow>
 
         <TableRow
@@ -131,6 +141,11 @@
                 android:id="@+id/button12"
                 style="@style/KeyStyle"
                 android:text="@string/btnDivide" />
+
+            <Button
+                android:id="@+id/button22"
+                style="@style/KeyStyle"
+                android:text="@string/btnTan" />
         </TableRow>
 
         <TableRow
@@ -161,6 +176,11 @@
                 android:id="@+id/button16"
                 style="@style/KeyStyle"
                 android:text="@string/btnResult" />
+
+            <Button
+                android:id="@+id/button23"
+                style="@style/KeyStyle"
+                android:text="@string/btnPow" />
         </TableRow>
     </TableLayout>
 

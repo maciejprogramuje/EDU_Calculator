@@ -89,6 +89,7 @@ public class CalculatorActivity extends AppCompatActivity {
             case "-":
             case "*":
             case "/":
+            case "POW":
                 if(isOperation) {
                     calculateResult();
                 }
@@ -107,7 +108,10 @@ public class CalculatorActivity extends AppCompatActivity {
                 calculatePercentageResult();
                 break;
             case "SQRT":
-                calculateSqrt();
+            case "SIN":
+            case "COS":
+            case "TAN":
+                calculateOneNumber(key);
                 break;
         }
         updateDisplay();
@@ -149,6 +153,9 @@ public class CalculatorActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.alert0, Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case POW:
+                displayResult(Math.pow(accumulator, displayValue));
+                break;
         }
         upperTextView.setText("");
         isOperation = false;
@@ -169,10 +176,25 @@ public class CalculatorActivity extends AppCompatActivity {
         isOperation = false;
     }
 
-    private void calculateSqrt() {
+    private void calculateOneNumber(String key) {
         setDisplayValueIfNull();
-        displayResult(Math.sqrt(displayValue));
-        upperTextView.setText(R.string.btnSqrt);
+
+        switch(key) {
+            case "SQRT":
+                displayResult(Math.sqrt(displayValue));
+                break;
+            case "SIN":
+                displayResult(Math.sin(displayValue));
+                break;
+            case "COS":
+                displayResult(Math.cos(displayValue));
+                break;
+            case "TAN":
+                displayResult(Math.tan(displayValue));
+                break;
+        }
+
+        upperTextView.setText(key);
         isOperation = false;
     }
 

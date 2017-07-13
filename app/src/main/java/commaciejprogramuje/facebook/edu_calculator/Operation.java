@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 enum Operation implements Serializable {
-    NONE(""), ADD("+"), SUBSTRACT("-"), DIVIDE("/"), MULTIPLY("*"), SQRT("SQRT"), PERCENT("%");
+    NONE(""), ADD("+"), SUBSTRACT("-"), DIVIDE("/"), MULTIPLY("*"), SQRT("SQRT"), PERCENT("%"), SIN("SIN"), COS("COS"), TAN("TAN"), POW("POW");
 
     private final String key;
 

@@ -22,4 +22,8 @@
     <string name="btnDivide">/</string>
     <string name="btnSqrt">SQRT</string>
     <string name="alert0">Dividing by 0 is not allowed!</string>
+    <string name="btnCos">COS</string>
+    <string name="btnPow">POW</string>
+    <string name="btnSin">SIN</string>
+    <string name="btnTan">TAN</string>
 </resources>
