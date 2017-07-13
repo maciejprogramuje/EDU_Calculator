@@ -52,7 +52,6 @@ public class CalculatorActivity extends AppCompatActivity {
             case "-":
             case "*":
             case "/":
-            case "SQRT":
                 if(isOperation) {
                     calculateResult();
                 }
@@ -69,6 +68,9 @@ public class CalculatorActivity extends AppCompatActivity {
                 break;
             case "%":
                 calculatePercentageResult();
+                break;
+            case "SQRT":
+                calculateSqrt();
                 break;
         }
         displayTextView.setText(display);
@@ -127,6 +129,13 @@ public class CalculatorActivity extends AppCompatActivity {
         setDisplayValueIfNull();
         displayResult(accumulator * displayValue / 100);
         upperTextView.setText("%");
+        isOperation = false;
+    }
+
+    private void calculateSqrt() {
+        setDisplayValueIfNull();
+        displayResult(Math.sqrt(displayValue));
+        upperTextView.setText(R.string.btnSqrt);
         isOperation = false;
     }
 
