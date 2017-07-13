@@ -1,7 +1,6 @@
 package commaciejprogramuje.facebook.edu_calculator;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -56,10 +55,6 @@ public class CalculatorActivity extends AppCompatActivity {
         upperTextView.setText(tempUpperValue);
     }
 
-    private void updateDisplay() {
-        displayTextView.setText(display);
-    }
-
     public void onClicked(View view) {
         Button button = (Button) view;
         String key = button.getText().toString();
@@ -91,12 +86,12 @@ public class CalculatorActivity extends AppCompatActivity {
             case "/":
             case "POW":
                 if(isOperation) {
-                    calculateResult();
+                    calculateResultTwoOperands();
                 }
-                calculateOperation(key);
+                setOperationAndAccumulator(key);
                 break;
             case "=":
-                calculateResult();
+                calculateResultTwoOperands();
                 break;
             case "CE":
                 clearOne();
@@ -105,16 +100,92 @@ public class CalculatorActivity extends AppCompatActivity {
                 clearAll();
                 break;
             case "%":
-                calculatePercentageResult();
+                calculateResultPercentOperation();
                 break;
             case "SQRT":
             case "SIN":
             case "COS":
             case "TAN":
-                calculateOneNumber(key);
+                calculateResultOneOperand(key);
                 break;
         }
         updateDisplay();
+    }
+
+    private void calculateResultOneOperand(String key) {
+        setDisplayValueIfNull();
+
+        switch(key) {
+            case "SQRT":
+                displayResultAsLongOrDouble(Math.sqrt(displayValue));
+                break;
+            case "SIN":
+                displayResultAsLongOrDouble(Math.sin(displayValue));
+                break;
+            case "COS":
+                displayResultAsLongOrDouble(Math.cos(displayValue));
+                break;
+            case "TAN":
+                displayResultAsLongOrDouble(Math.tan(displayValue));
+                break;
+        }
+
+        upperTextView.setText(key);
+        isOperation = false;
+    }
+
+    private void calculateResultTwoOperands() {
+        setDisplayValueIfNull();
+
+        switch (currentOperation) {
+            case ADD:
+                displayResultAsLongOrDouble(accumulator + displayValue);
+                break;
+            case SUBSTRACT:
+                displayResultAsLongOrDouble(accumulator - displayValue);
+                break;
+            case MULTIPLY:
+                displayResultAsLongOrDouble(accumulator * displayValue);
+                break;
+            case DIVIDE:
+                if (displayValue != 0) {
+                    displayResultAsLongOrDouble(accumulator / displayValue);
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.alert0, Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case POW:
+                displayResultAsLongOrDouble(Math.pow(accumulator, displayValue));
+                break;
+        }
+        upperTextView.setText("");
+        isOperation = false;
+    }
+
+    private void calculateResultPercentOperation() {
+        setDisplayValueIfNull();
+        displayResultAsLongOrDouble(accumulator * displayValue / 100);
+        upperTextView.setText("%");
+        isOperation = false;
+    }
+
+    private void displayResultAsLongOrDouble(double result) {
+        if (result == (long) result) {
+            display = String.valueOf((long) result);
+        } else {
+            display = String.valueOf(result);
+        }
+    }
+
+    private void setOperationAndAccumulator(String key) {
+        currentOperation = Operation.operationFromKey(key);
+        accumulator = Double.valueOf(display);
+
+        String temp = display + key;
+        upperTextView.setText(temp);
+
+        display = "";
+        isOperation = true;
     }
 
     private void clearAll() {
@@ -133,32 +204,8 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
-    private void calculateResult() {
-        setDisplayValueIfNull();
-
-        switch (currentOperation) {
-            case ADD:
-                displayResult(accumulator + displayValue);
-                break;
-            case SUBSTRACT:
-                displayResult(accumulator - displayValue);
-                break;
-            case MULTIPLY:
-                displayResult(accumulator * displayValue);
-                break;
-            case DIVIDE:
-                if (displayValue != 0) {
-                    displayResult(accumulator / displayValue);
-                } else {
-                    Toast.makeText(getApplicationContext(), R.string.alert0, Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case POW:
-                displayResult(Math.pow(accumulator, displayValue));
-                break;
-        }
-        upperTextView.setText("");
-        isOperation = false;
+    private void updateDisplay() {
+        displayTextView.setText(display);
     }
 
     private void setDisplayValueIfNull() {
@@ -167,53 +214,5 @@ public class CalculatorActivity extends AppCompatActivity {
         } else {
             displayValue = Double.valueOf(display);
         }
-    }
-
-    private void calculatePercentageResult() {
-        setDisplayValueIfNull();
-        displayResult(accumulator * displayValue / 100);
-        upperTextView.setText("%");
-        isOperation = false;
-    }
-
-    private void calculateOneNumber(String key) {
-        setDisplayValueIfNull();
-
-        switch(key) {
-            case "SQRT":
-                displayResult(Math.sqrt(displayValue));
-                break;
-            case "SIN":
-                displayResult(Math.sin(displayValue));
-                break;
-            case "COS":
-                displayResult(Math.cos(displayValue));
-                break;
-            case "TAN":
-                displayResult(Math.tan(displayValue));
-                break;
-        }
-
-        upperTextView.setText(key);
-        isOperation = false;
-    }
-
-    private void displayResult(double result) {
-        if (result == (long) result) {
-            display = String.valueOf((long) result);
-        } else {
-            display = String.valueOf(result);
-        }
-    }
-
-    private void calculateOperation(String key) {
-        currentOperation = Operation.operationFromKey(key);
-        accumulator = Double.valueOf(display);
-
-        String temp = display + key;
-        upperTextView.setText(temp);
-
-        display = "";
-        isOperation = true;
     }
 }
