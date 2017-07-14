@@ -26,25 +26,15 @@
         <TextView
             android:id="@+id/resultTextView"
             style="@style/DisplayStyle"
-            android:layout_weight="20"
+            android:layout_weight="15"
             android:textSize="50sp" />
 
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="0dp"
-            android:layout_weight="0"
             android:shrinkColumns="0,1,2,3,4"
-            android:stretchColumns="0,1,2,3,4"
-            android:weightSum="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            android:stretchColumns="0,1,2,3,4" >
 
             <TableRow
                 android:layout_width="match_parent"
@@ -67,12 +57,12 @@
 
                 <Button
                     android:id="@+id/button4"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Special"
                     android:text="@string/btnCe" />
 
                 <Button
                     android:id="@+id/button"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Special"
                     android:text="@string/btnC" />
             </TableRow>
 
@@ -97,12 +87,12 @@
 
                 <Button
                     android:id="@+id/button7"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnPercent" />
 
                 <Button
                     android:id="@+id/button8"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnMultiply" />
             </TableRow>
 
@@ -127,12 +117,12 @@
 
                 <Button
                     android:id="@+id/button11"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnSubstract" />
 
                 <Button
                     android:id="@+id/button12"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnDivide" />
             </TableRow>
 
@@ -152,17 +142,17 @@
 
                 <Button
                     android:id="@+id/button14"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnSqrt" />
 
                 <Button
                     android:id="@+id/button15"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Operation"
                     android:text="@string/btnAdd" />
 
                 <Button
                     android:id="@+id/button16"
-                    style="@style/KeyStyle"
+                    style="@style/KeyStyle.Special"
                     android:text="@string/btnResult" />
             </TableRow>
         </TableLayout>
